@@ -21,6 +21,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jdbc.repository.config.AbstractJdbcConfiguration;
 import org.springframework.data.jdbc.repository.config.EnableJdbcRepositories;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.JdbcTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.testcontainers.containers.PostgreSQLContainer;
 
 import javax.sql.DataSource;
@@ -50,5 +52,10 @@ public class Config extends AbstractJdbcConfiguration {
 	@Bean
 	NamedParameterJdbcTemplate namedParameterJdbcTemplate(DataSource dataSource) {
 		return new NamedParameterJdbcTemplate(dataSource);
+	}
+
+	@Bean
+	PlatformTransactionManager transactionManager(DataSource dataSource) {
+		return new JdbcTransactionManager(dataSource);
 	}
 }

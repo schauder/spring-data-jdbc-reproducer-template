@@ -20,12 +20,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.assertj.core.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = Config.class)
+@Sql(scripts = "/schema.sql")
 class PersonRepositoryTests {
 
 	@Autowired
@@ -33,7 +35,13 @@ class PersonRepositoryTests {
 
 	@Test
 	void test() {
-		assertThat(persons).isNotNull();
+
+		Person einstein = new Person();
+		einstein.name = "Albert";
+		einstein = persons.save(einstein);
+
+		assertThat(einstein.id).isNotNull();
+
 	}
 
 }
