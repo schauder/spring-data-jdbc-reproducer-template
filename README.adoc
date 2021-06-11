@@ -1,0 +1,11 @@
+== Spring Data JDBC Reproducer Template
+
+This is a template for reproducers for Spring Data JDBC issues.
+
+It has the following properties, which I consider beneficial:
+
+* Based on Maven, the build tool which is used also by Spring Data itself.
+* Uses JUnit 5
+* Includes AssertJ for assertions
+* Uses Spring Test support for running setup scripts
+* Uses Testcontainers for setting up a database.
